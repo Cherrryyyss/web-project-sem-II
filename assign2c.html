@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | Wildlife India</title>
+    <style>
+        :root {
+            --forest-green: #1b4332;
+             --forest: #1b4332;    
+            --shelf-gold: #d69d56;
+            --text-cream: #fdf1ca;
+            --glass: rgba(30, 20, 10, 0.8);
+        }
+
+        body {
+            background: radial-gradient(circle at center, #7d5a36, #2b1e10);
+            background-attachment: fixed;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Navigation --- */
+        header {
+            background: var(--forest-green);
+            padding: 20px 0;
+            border-bottom: 3px solid var(--shelf-gold);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 40px;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Form Container --- */
+        .container {
+            flex: 1;
+            max-width: 600px;
+            margin: 60px auto;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid var(--shelf-gold);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            color: var(--shelf-gold);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(214, 157, 86, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--shelf-gold);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        select option {
+            background: #2b1e10;
+            color: #fff;
+        }
+        .rating-group {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.rating-group p {
+    color: var(--shelf-gold);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse; 
+    justify-content: center;
+    gap: 10px;
+}
+
+.stars input {
+    display: none; 
+}
+
+.stars label {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover and Checked effects */
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label {
+    color: var(--shelf-gold);
+    text-shadow: 0 0 10px rgba(214, 157, 86, 0.5);
+}
+
+        button {
+            background: var(--shelf-gold);
+            color: #2b1e10;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #fff;
+            transform: scale(1.02);
+        }
+
+        #responseMsg {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(27, 67, 50, 0.6);
+            border: 1px solid var(--shelf-gold);
+            color: var(--text-cream);
+            display: none;
+            font-weight: 500;
+        }
+
+       /* --- 5. Footer --- */
+footer {
+    background: var(--forest);
+    color: white;
+    padding: 60px 20px 30px;
+    border-top: 8px solid var(--shelf-gold);
+    text-align: center;
+}
+
+footer h3 {
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    align-items: center; 
+}
+
+.footer-section ul li a {
+    color: #f8f9fa; 
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    opacity: 0.9;
+    border-bottom: 1px solid transparent;
+}
+
+.footer-section ul li a:hover {
+    color: var(--shelf-gold); 
+    opacity: 1;
+    border-bottom: 1px solid var(--shelf-gold);
+}
+
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.footer-credits {
+    margin-bottom: 20px;
+    border-top: 1px solid rgba(214, 157, 186, 0.2); 
+    padding-top: 15px;
+}
+
+.footer-credits p {
+    font-size: 0.8rem;
+    color: #fdf1ca; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-credits span {
+    color: var(--shelf-gold);
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="assign2.html">Home</a></li>
+            <li><a href="assign2a.html">Vegetation</a></li>
+            <li><a href="assign2b.html">Wildlife</a></li>
+            <li><a href="assign2c.html">Feedback</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Website Feedback</h1>
+    <form id="wildlifeForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <div class="rating-group">
+    <p>Rate our Content Quality:</p>
+    <div class="stars">
+        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+    </div>
+</div>
+        <textarea id="message" rows="5" placeholder="Share your thoughts..."></textarea>
+        <button type="submit">Send Feedback</button>
+    </form>
+    <div id="responseMsg"></div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Sources & References</h3>
+            <ul>
+                <li><a href="https://wii.gov.in/" target="_blank">Wildlife Institute of India</a></li>
+                <li><a href="https://envfor.nic.in/" target="_blank">Ministry of Environment, Forest and Climate Change</a></li>
+                <li><a href="https://www.worldwildlife.org/" target="_blank">WWF India</a></li>
+            </ul>
+        </div>
+        <div class="footer-credits">
+    <p>Visual Assets: <span>Created with Canva</span></p>
+</div>
+        <div class="footer-bottom">
+            <p> Designed for BCA Project</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const feedbackForm = document.getElementById('wildlifeForm');
+        const responseMsg = document.getElementById('responseMsg');
+
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                const name = document.getElementById('name').value;
+                responseMsg.style.display = 'block';
+                responseMsg.innerHTML = `🌿 Thank you, ${name}! `;
+                console.log("Form Submitted successfully!");
+                feedbackForm.reset();
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

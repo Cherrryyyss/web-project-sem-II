@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Wildlife India</title>
+   <style>
+   :root {
+    --forest-green: #1b4332;
+    
+    --forest: #1b4332;    
+    --shelf-gold: #d69d56;
+    --text-cream: #fdf1ca;
+    --bg-dark: #2b1e10;
+    --bg-light: #7d5a36;
+}
+
+    body {
+        background: radial-gradient(circle at center, #7d5a36, #2b1e10);
+        background-attachment: fixed;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        color: #fff;
+    }
+
+    /* Header & Nav */
+    header {
+        background: rgba(27, 67, 50, 0.95);
+        padding: 20px 0;
+        text-align: center;
+        border-bottom: 1px solid var(--shelf-gold);
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 30px;
+        padding: 0;
+    }
+
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    /* The Main Mind Map Layout */
+    .mind-map-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        padding: 80px 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* The Left and Right Columns */
+    .node-column {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        flex: 1;
+    }
+
+    /* The Central Hub Circle */
+    .main-hub {
+        width: 250px;
+        height: 250px;
+        background: var(--shelf-gold);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 5px solid #fff;
+        box-shadow: 0 0 40px rgba(214, 157, 86, 0.5);
+        flex-shrink: 0; 
+    }
+
+    .main-hub h1 {
+        color: #2b1e10;
+        font-family: 'Georgia', serif;
+        font-size: 1.8rem;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    /* Individual Info Boxes */
+    .map-node {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(214, 157, 86, 0.4);
+        transition: 0.3s;
+    }
+
+    .map-node:hover {
+        border-color: #fff;
+        transform: translateY(-5px);
+    }
+
+    .map-node h3 {
+        color: var(--shelf-gold);
+        margin-top: 0;
+        border-bottom: 2px solid var(--shelf-gold);
+        padding-bottom: 10px;
+    }
+
+    .node-desc {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #fdf1ca;
+        margin: 15px 0;
+    }
+
+    .node-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .node-list li {
+        font-size: 0.9rem;
+        border-left: 3px solid var(--shelf-gold);
+        padding-left: 10px;
+        margin-bottom: 8px;
+    }
+/* --- 5. Footer --- */
+footer {
+    background: var(--forest);
+    color: white;
+    padding: 60px 20px 30px;
+    border-top: 8px solid var(--shelf-gold);
+    text-align: center;
+}
+
+footer h3 {
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    align-items: center; 
+}
+
+.footer-section ul li a {
+    color: #f8f9fa;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    opacity: 0.9;
+    border-bottom: 1px solid transparent;
+}
+
+.footer-section ul li a:hover {
+    color: var(--shelf-gold); 
+    opacity: 1;
+    border-bottom: 1px solid var(--shelf-gold);
+}
+
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.footer-credits {
+    margin-bottom: 20px;
+    border-top: 1px solid rgba(214, 157, 186, 0.2); 
+    padding-top: 15px;
+}
+
+.footer-credits p {
+    font-size: 0.8rem;
+    color: #fdf1ca; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-credits span {
+    color: var(--shelf-gold);
+    font-weight: bold;
+}
+   
+</style>
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="assign2.html">Home</a></li>
+            <li><a href="assign2a.html">Vegetation</a></li>
+            <li><a href="assign2b.html">Wildlife</a></li>
+            <li><a href="assign2c.html">Feedback</a></li>
+        </ul>
+    </nav>
+    </header>
+<div class="mind-map-container">
+    <div class="node-column">
+        <div class="map-node">
+            <h3>Tropical Evergreen</h3>
+            <p class="node-desc">Thriving in regions with over 200cm of rain, these forests are multi-layered and dense.</p>
+            <ul class="node-list">
+                <li>Species: Rosewood, Ebony</li>
+            </ul>
+        </div>
+        <div class="map-node">
+            <h3>Montane & Alpine</h3>
+            <p class="node-desc">Found in high altitudes, featuring needle-like leaves to handle snow.</p>
+            <ul class="node-list">
+                <li>Areas: Himalayan Ranges</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-hub">
+        <h1>INDIAN<br>VEGETATION</h1>
+    </div>
+
+    <div class="node-column">
+        <div class="map-node">
+            <h3>Tropical Deciduous</h3>
+            <p class="node-desc">The most widespread forests in India; they shed leaves during the dry summer.</p>
+            <ul class="node-list">
+                <li>Species: Teak, Sal, Neem</li>
+            </ul>
+        </div>
+        <div class="map-node">
+            <h3>Mangrove (Tidal)</h3>
+            <p class="node-desc">Unique forests that survive in salty water along the coastlines.</p>
+            <ul class="node-list">
+                <li>Areas: Sundarbans</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Sources & References</h3>
+            <ul>
+                <li><a href="https://wii.gov.in/" target="_blank">Wildlife Institute of India</a></li>
+                <li><a href="https://envfor.nic.in/" target="_blank">Ministry of Environment, Forest and Climate Change</a></li>
+                <li><a href="https://www.worldwildlife.org/" target="_blank">WWF India</a></li>
+            </ul>
+        </div>
+        <div class="footer-credits">
+    <p>Visual Assets: <span>Created with Canva</span></p>
+</div>
+        <div class="footer-bottom">
+            <p> Designed for BCA Project</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,260 @@
+/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #F3E8DF; /* Lightest Cream */
+    color: #452829; /* Dark Coffee */
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 15px 10%;
+    background: #452829; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px; 
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #F3E8DF; 
+    font-weight: bold;
+    font-size: 0.85rem; 
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #E8D1C5;
+    text-shadow: 0 0 8px rgba(232, 209, 197, 0.4);
+}
+
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #2e1c1b; 
+    background-image: 
+        linear-gradient(rgba(142, 111, 112, 0.15) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(142, 111, 112, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px; 
+    color: #F3E8DF;
+    position: relative;
+}
+
+.header-main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+    gap: 60px;
+}
+
+.header-left {
+    text-align: left;
+}
+
+.intro-greeting {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    letter-spacing: 2px;
+    margin-bottom: -20px;
+    position: relative;
+    z-index: 2;
+}
+
+.highlight {
+    font-family: 'Dancing Script', cursive;
+    color: #E8D1C5; 
+    font-size: 6rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.sub-description {
+    font-size: 1rem;
+    margin-top: 15px;
+    opacity: 0.75;
+    letter-spacing: 1px;
+    text-transform: none; 
+    max-width: 500px;
+    line-height: 1.5;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.circular-photo {
+    width: 240px;
+    height: 240px;
+    border-radius: 50% !important;
+    object-fit: cover;
+    border: 3px solid rgba(243, 232, 223, 0.1);
+    outline: 2px solid #E8D1C5;
+    outline-offset: 10px;
+    background-color: #3d2625;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* --- SKILLS RIBBON --- */
+.skills-ribbon {
+    background: #E8D1C5;
+    color: #452829;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border-top: 5px solid #452829;
+}
+
+
+section {
+    padding: 100px 10%;
+}
+
+h2 {
+    color: #8e6f70;
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 2.2rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(232, 209, 197, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(69, 40, 41, 0.05);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-12px);
+    background: rgba(255, 255, 255, 0.7);
+    border-color: #452829;
+    box-shadow: 0 20px 40px rgba(69, 40, 41, 0.15);
+}
+
+
+.milestone-section {
+    background-color: #2e1c1b;
+    color: #F3E8DF;
+    padding: 100px 10%;
+}
+
+.milestone-grid {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.milestone-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+}
+
+.milestone-item h4 {
+    color: #E8D1C5;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.milestone-item p {
+    font-size: 1rem;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+
+footer {
+    background-color: #452829; 
+    color: #F3E8DF;
+    padding: 40px 10%; 
+    text-align: center;
+    border-top: 4px solid #E8D1C5; 
+}
+
+footer h2 {
+    color: #E8D1C5;
+    font-size: 1.5rem; 
+    margin-bottom: 20px; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: row; 
+    gap: 30px; 
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+.contact-item {
+    font-size: 0.95rem; 
+    text-decoration: none;
+    color: #F3E8DF;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.contact-item:hover {
+    opacity: 1;
+    color: #E8D1C5;
+}
+
+.copyright {
+    font-size: 0.75rem;
+    opacity: 0.3;
+    margin-top: 25px; 
+    letter-spacing: 1px;
+}

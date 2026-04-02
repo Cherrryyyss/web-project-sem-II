@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Archery</title>
+    <style>
+        body { margin: 0; background: #222; display: flex; flex-direction: column; align-items: center; color: white; font-family: sans-serif; overflow: hidden; }
+        canvas { background: #87CEEB; border: 4px solid #555; cursor: crosshair; margin-top: 20px; }
+        .ui { margin-top: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="ui">
+        <h1>Simple Archery</h1>
+        <p>Click and Drag back to aim | Release to fire! Score: <span id="score">0</span></p>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('score');
+
+canvas.width = 800;
+canvas.height = 400;
+
+// Game State
+let score = 0;
+let isDragging = false;
+let arrow = { x: 100, y: 300, vx: 0, vy: 0, active: false, angle: 0 };
+let target = { x: 700, y: 200, radius: 30 };
+let mousePos = { x: 0, y: 0 };
+
+// Input Listeners
+canvas.addEventListener('mousedown', (e) => {
+    if (!arrow.active) isDragging = true;
+});
+
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mousePos.x = e.clientX - rect.left;
+    mousePos.y = e.clientY - rect.top;
+});
+
+canvas.addEventListener('mouseup', () => {
+    if (isDragging) {
+        const dx = 100 - mousePos.x;
+        const dy = 300 - mousePos.y;
+        
+        arrow.vx = dx * 0.15; // Power multiplier
+        arrow.vy = dy * 0.15;
+        arrow.active = true;
+        isDragging = false;
+    }
+});
+
+function update() {
+    // 1. Logic: Arrow Flight
+    if (arrow.active) {
+        arrow.x += arrow.vx;
+        arrow.y += arrow.vy;
+        arrow.vy += 0.25; // Gravity
+        arrow.angle = Math.atan2(arrow.vy, arrow.vx);
+
+        // Collision Detection (Circle vs Point)
+        const dist = Math.hypot(arrow.x - target.x, arrow.y - target.y);
+        if (dist < target.radius) {
+            score++;
+            scoreEl.innerText = score;
+            resetArrow();
+            moveTarget();
+        }
+
+        // Reset if off screen
+        if (arrow.y > canvas.height || arrow.x > canvas.width) {
+            resetArrow();
+        }
+    }
+
+    draw();
+    requestAnimationFrame(update);
+}
+
+function resetArrow() {
+    arrow.active = false;
+    arrow.x = 100;
+    arrow.y = 300;
+}
+
+function moveTarget() {
+    target.y = Math.random() * (canvas.height - 100) + 50;
+}
+
+function draw() {
+    // Clear Canvas (Sky)
+    ctx.fillStyle = "#87CEEB";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw Ground
+    ctx.fillStyle = "#2d5a27";
+    ctx.fillRect(0, 350, canvas.width, 50);
+
+    // Draw Target
+    ctx.beginPath();
+    ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "white"; ctx.fill();
+    ctx.strokeStyle = "red"; ctx.lineWidth = 8; ctx.stroke();
+    ctx.closePath();
+
+    // Draw Arrow/Bow Direction
+    ctx.save();
+    ctx.translate(arrow.x, arrow.y);
+    if (isDragging) {
+        const angle = Math.atan2(300 - mousePos.y, 100 - mousePos.x);
+        ctx.rotate(angle);
+    } else {
+        ctx.rotate(arrow.angle);
+    }
+    
+    // The Arrow Graphic
+    ctx.strokeStyle = "#553311";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(-20, 0);
+    ctx.lineTo(20, 0);
+    ctx.stroke();
+    // Arrow Head
+    ctx.fillStyle = "silver";
+    ctx.beginPath();
+    ctx.moveTo(20, 0);
+    ctx.lineTo(12, -5);
+    ctx.lineTo(12, 5);
+    ctx.fill();
+    ctx.restore();
+
+    // Draw Drag Line (Visual Aid)
+    if (isDragging) {
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(100, 300);
+        ctx.lineTo(mousePos.x, mousePos.y);
+        ctx.strokeStyle = "rgba(255,255,255,0.5)";
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+}
+
+update();
+</script>
+</body>
+</html>

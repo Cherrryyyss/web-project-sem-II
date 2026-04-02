@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Neon Lander</title>
+    <style>
+        body { margin: 0; background: #050505; color: #00ffcc; font-family: 'Courier New', Courier, monospace; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+        canvas { border: 2px solid #00ffcc; box-shadow: 0 0 15px #00ffcc; margin-top: 20px; background: black; }
+        .stats { margin-top: 15px; text-align: center; width: 600px; display: flex; justify-content: space-around; }
+        #fuelBar { width: 200px; height: 15px; border: 1px solid #00ffcc; position: relative; }
+        #fuelFill { height: 100%; background: #00ffcc; width: 100%; transition: width 0.1s; }
+    </style>
+</head>
+<body>
+
+    <div class="stats">
+        <div>ALTITUDE: <span id="alt">0</span>m</div>
+        <div>VELOCITY: <span id="vel">0</span> m/s</div>
+        <div id="fuelBar"><div id="fuelFill"></div></div>
+    </div>
+    <canvas id="landerCanvas"></canvas>
+    <p>Hold SPACE or CLICK to Thrust. Land softly (< 1.5 m/s)!</p>
+
+<script>
+const canvas = document.getElementById('landerCanvas');
+const ctx = canvas.getContext('2d');
+const fuelFill = document.getElementById('fuelFill');
+const altEl = document.getElementById('alt');
+const velEl = document.getElementById('vel');
+
+canvas.width = 600;
+canvas.height = 500;
+
+const GRAVITY = 0.04;
+const THRUST = 0.12;
+const SAFE_SPEED = 1.5;
+
+let ship = { x: 100, y: 50, vx: 0, vy: 0, fuel: 100, isThrusting: false, state: 'flying' };
+
+// --- NEW: Platform with Velocity ---
+let platform = { 
+    x: 300, 
+    y: 450, 
+    w: 100, 
+    h: 10, 
+    vx: 2 // Change this number to make the bar move faster or slower
+};
+
+let keys = {};
+const stars = Array.from({ length: 50 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2
+}));
+
+window.addEventListener('keydown', (e) => { 
+    keys[e.code] = true;
+    if (ship.state !== 'flying' && e.code === 'Space') resetGame();
+});
+window.addEventListener('keyup', (e) => keys[e.code] = false);
+
+function resetGame() {
+    ship = { x: 100, y: 50, vx: 0, vy: 0, fuel: 100, isThrusting: false, state: 'flying' };
+    // Optional: reset platform position too
+    platform.x = 300;
+}
+
+function update() {
+    // --- MOVE THE PLATFORM ---
+    if (ship.state === 'flying') {
+        platform.x += platform.vx;
+
+        // Bounce platform off walls
+        if (platform.x + platform.w > canvas.width || platform.x < 0) {
+            platform.vx *= -1; 
+        }
+    }
+
+    if (ship.state === 'flying') {
+        ship.vy += GRAVITY;
+
+        if (keys['Space'] && ship.fuel > 0) {
+            ship.vy -= THRUST;
+            ship.fuel -= 0.5;
+            ship.isThrusting = true;
+        } else {
+            ship.isThrusting = false;
+        }
+
+        if (keys['ArrowLeft']) ship.vx -= 0.05;
+        if (keys['ArrowRight']) ship.vx += 0.05;
+        
+        ship.x += ship.vx;
+        ship.y += ship.vy;
+
+        fuelFill.style.width = ship.fuel + "%";
+        altEl.innerText = Math.max(0, Math.floor(450 - ship.y));
+        velEl.innerText = ship.vy.toFixed(2);
+
+        // Landing Logic (Checks against the moving platform.x)
+       // Landing Logic (Improved)
+// We check if the ship is within a small vertical range (5px) of the platform top
+const shipBottom = ship.y + 10;
+const hitPlatformTop = shipBottom >= platform.y && shipBottom <= platform.y + 10;
+const withinPlatformWidth = ship.x > platform.x && ship.x < platform.x + platform.w;
+
+if (hitPlatformTop && withinPlatformWidth) {
+    // If we were falling (vy > 0) and hit the platform
+    if (ship.vy <= SAFE_SPEED) {
+        ship.state = 'landed';
+        ship.vy = 0; 
+        ship.vx = 0;
+        ship.y = platform.y - 10; // Snap to surface so it looks clean
+    } else {
+        ship.state = 'crashed';
+    }
+}
+        if (ship.y > canvas.height || ship.x < 0 || ship.x > canvas.width) ship.state = 'crashed';
+    }
+    draw();
+    requestAnimationFrame(update);
+}
+
+function draw() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "white";
+    stars.forEach(s => ctx.fillRect(s.x, s.y, s.size, s.size));
+
+    // Draw the Moving Platform
+    ctx.fillStyle = "#00ffcc";
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = "#00ffcc";
+    ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
+    ctx.shadowBlur = 0; // Reset shadow for other elements
+
+    // Ship
+    ctx.save();
+    ctx.translate(ship.x, ship.y);
+    if (ship.isThrusting && ship.fuel > 0 && ship.state === 'flying') {
+        ctx.fillStyle = "orange";
+        ctx.beginPath();
+        ctx.moveTo(-5, 10); ctx.lineTo(5, 10); ctx.lineTo(0, 25); ctx.fill();
+    }
+    ctx.strokeStyle = ship.state === 'crashed' ? 'red' : '#00ffcc';
+    ctx.strokeRect(-10, -10, 20, 20); 
+    ctx.restore();
+
+    if (ship.state !== 'flying') {
+        ctx.fillStyle = "white";
+        ctx.font = "20px Courier New";
+        ctx.textAlign = "center";
+        ctx.fillText(ship.state.toUpperCase() + "!", 300, 200);
+        ctx.fillText("PRESS SPACE TO RESTART", 300, 230);
+    }
+}
+update();
+</script>
+</body>
+</html>
