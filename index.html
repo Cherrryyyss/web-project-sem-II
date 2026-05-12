@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative & Tech Hub</title>
+    <style>
+        /* Base Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1a1a1e;
+            --accent-cyan: #00f2fe;
+            --accent-mint: #00f5d4;
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: #2d2d34;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background glow */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .badge-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-mint);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.7);
+            animation: pulse 1.6s infinite;
+        }
+
+        .badge-text {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-mint);
+            font-weight: 600;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        header p span {
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 960px;
+        }
+
+        /* Interactive Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+
+        /* Card Hover Effects */
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 
+                        0 0 20px rgba(0, 242, 254, 0.1);
+        }
+
+        /* Hidden gradient overlay that lights up on hover */
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.03) 0%, rgba(0, 245, 212, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-content h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-content h2 {
+            color: var(--accent-cyan);
+        }
+
+        .card-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .card-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            align-self: flex-end;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .card:hover .card-arrow {
+            transform: translateX(4px);
+            color: var(--accent-mint);
+        }
+
+        /* Keyframe Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.5);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(0, 245, 212, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body { padding: 1.5rem; }
+            header h1 { font-size: 2rem; }
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-container">
+            <div class="pulse-dot"></div>
+            <span class="badge-text">Active Terminal</span>
+        </div>
+        <h1>Creative Tech Hub</h1>
+        <p>BCA Student navigating the intersection of <span>clean development</span>, <span>finance logic</span>, and <span>creative digital aesthetics</span>.</p>
+    </header>
+
+    <main class="grid-container">
+
+        <a href="Portfolio.html" class="card">
+            <div class="card-content">
+                <h2>My Portfolio</h2>
+                <p>My personal visual canvas showcasing my skills, goals, and core identity.</p>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <a href="assign2.html" class="card">
+            <div class="card-content">
+                <h2>Creative Assignments</h2>
+                <p>A collection of structural web projects and logic built during Semester 2.</p>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <a href="game1.html" class="card">
+            <div class="card-content">
+                <h2>Web Mini-Games</h2>
+                <p>Interactive, frontend logic gameplay experiments built entirely with code logic.</p>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+
+    </main>
+
+</body>
+</html>
