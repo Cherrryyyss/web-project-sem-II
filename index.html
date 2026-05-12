@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Ambient background glow */
         body::before {
             content: '';
             position: absolute;
@@ -104,6 +103,19 @@
             font-weight: 500;
         }
 
+        /* Section Headings */
+        .section-title {
+            width: 100%;
+            max-width: 960px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
         /* Grid Layout */
         .grid-container {
             display: grid;
@@ -111,6 +123,7 @@
             gap: 1.5rem;
             width: 100%;
             max-width: 960px;
+            margin-bottom: 1rem;
         }
 
         /* Interactive Cards */
@@ -127,23 +140,21 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 200px;
+            min-height: 180px;
         }
 
-        /* Card Hover Effects */
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: rgba(0, 242, 254, 0.4);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 
-                        0 0 20px rgba(0, 242, 254, 0.1);
+                        0 0 20px rgba(0, 242, 254, 0.05);
         }
 
-        /* Hidden gradient overlay that lights up on hover */
         .card::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(0, 242, 254, 0.03) 0%, rgba(0, 245, 212, 0.03) 100%);
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.02) 0%, rgba(0, 245, 212, 0.02) 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -153,7 +164,7 @@
         }
 
         .card-content h2 {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             transition: color 0.3s ease;
@@ -165,12 +176,38 @@
 
         .card-content p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
+        /* Sub-links layout inside the Assignment Card */
+        .links-list {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sub-link {
+            display: block;
+            color: var(--accent-mint);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.4rem 0.75rem;
+            background: rgba(0, 245, 212, 0.05);
+            border-radius: 8px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .sub-link:hover {
+            background: rgba(0, 245, 212, 0.15);
+            transform: translateX(3px);
+        }
+
         .card-arrow {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
             align-self: flex-end;
             transition: transform 0.3s ease, color 0.3s ease;
@@ -181,23 +218,12 @@
             color: var(--accent-mint);
         }
 
-        /* Keyframe Animations */
         @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.5);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 8px rgba(0, 245, 212, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0);
-            }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 245, 212, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 245, 212, 0); }
         }
 
-        /* Responsive adjustments */
         @media (max-width: 600px) {
             body { padding: 1.5rem; }
             header h1 { font-size: 2rem; }
@@ -216,8 +242,8 @@
         <p>BCA Student navigating the intersection of <span>clean development</span>, <span>finance logic</span>, and <span>creative digital aesthetics</span>.</p>
     </header>
 
+    <div class="section-title">Core & Entertainment</div>
     <main class="grid-container">
-
         <a href="Portfolio.html" class="card">
             <div class="card-content">
                 <h2>My Portfolio</h2>
@@ -226,22 +252,44 @@
             <div class="card-arrow">→</div>
         </a>
 
-        <a href="assign2.html" class="card">
-            <div class="card-content">
-                <h2>Creative Assignments</h2>
-                <p>A collection of structural web projects and logic built during Semester 2.</p>
-            </div>
-            <div class="card-arrow">→</div>
-        </a>
-
         <a href="game1.html" class="card">
             <div class="card-content">
-                <h2>Web Mini-Games</h2>
-                <p>Interactive, frontend logic gameplay experiments built entirely with code logic.</p>
+                <h2>Web Game: Concept I</h2>
+                <p>Interactive game logic built natively with frontend scripting experiments.</p>
             </div>
             <div class="card-arrow">→</div>
         </a>
 
+        <a href="game2.html" class="card">
+            <div class="card-content">
+                <h2>Web Game: Concept II</h2>
+                <p>Advanced interface mechanics and gameplay loop logic testing.</p>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+    </main>
+
+    <div class="section-title">Semester II Lab Work</div>
+    <main class="grid-container">
+        <a href="assign2.html" class="card">
+            <div class="card-content">
+                <h2>Primary Assignment Suite</h2>
+                <p>Core algorithmic execution and structural layouts for standard submission.</p>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <div class="card" style="cursor: default;">
+            <div class="card-content" style="width: 100%;">
+                <h2>Additional Lab Projects</h2>
+                <p style="margin-bottom: 0.75rem;">Supplementary modular files for sub-tasks:</p>
+                <div class="links-list">
+                    <a class="sub-link" href="assign2a.html">→ Module 2A Project</a>
+                    <a class="sub-link" href="assign2b.html">→ Module 2B Project</a>
+                    <a class="sub-link" href="assign2c.html">→ Module 2C Project</a>
+                </div>
+            </div>
+        </div>
     </main>
 
 </body>
